@@ -6,6 +6,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#define LIFO 1
+#define FIFO 0
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -36,18 +39,29 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct info_s - Data From The Monty File
+ * @type: FIFO LIFO
+ */
+typedef struct info_s
+{
+	int format;
+	char **arg;
+} info_t;
+
 /* Global variables */
-extern char *info.arg;
-extern char *info.cmd;
-extern char *info.fn;
-extern unsigned int info.l_number;
-extern FILE *info.fp;
+extern info_t info;
 
 /* Function prototypes */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void _stack(stack_t **stack, unsigned int line_number);
+void _queue(stack_t **stack, unsigned int line_number);
 void add_node(stack_t **stack, int n);
-void free_info(void);
+void free_globals(void);
 void free_list(stack_t *stack);
+int is_num(char *str);
+void add_fifo(stack_t **stack, stack_t *n_node);
+void add_lifo(stack_t **stack, stack_t *n_node);
 
 #endif /* MONTY_H */
