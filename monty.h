@@ -56,6 +56,7 @@ typedef struct info_s
 /* Global variables */
 extern info_t info;
 extern char **op_toks;
+char **op_toks = NULL;
 
 char **strtow(char *str, char *delims);
 char *get_int(int n);
@@ -76,10 +77,15 @@ int pint_error(unsigned int line_number);
 int short_stack_error(unsigned int line_number, char *op);
 int div_error(unsigned int line_number);
 int pchar_error(unsigned int line_number, char *message);
+int execute_script(FILE *script_fd);
+int process_opcodes(char *opcode, stack_t **stack);
 
 /* Function prototypes */
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, int value);
+void pall(stack_t **stack);
+void swap(stack_t **stack);
+void add(stack_t **stack);
+void pop(stack_t **stack);
 void _stack(stack_t **stack, unsigned int line_number);
 void _queue(stack_t **stack, unsigned int line_number);
 void add_node(stack_t **stack, int n);

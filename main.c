@@ -1,17 +1,11 @@
 #include "monty.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-char **op_toks = NULL;
-
 /**
  * main - entry point for Monty
  *
  * @argc: count of arguments passed to the program
  * @argv: pointer to an array of char pointers to arguments
  *
- * Return: (EXIT_SUCCESS) on success (EXIT_FAILURE) on error
+ * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on error
  */
 int main(int argc, char **argv)
 {
@@ -20,10 +14,13 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		return (usage_error());
+
 	script_fd = fopen(argv[1], "r");
 	if (script_fd == NULL)
 		return (f_open_error(argv[1]));
-	exit_code = run_monty(script_fd);
+
+	exit_code = execute_script(script_fd);
+
 	fclose(script_fd);
 	return (exit_code);
 }
