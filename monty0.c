@@ -8,12 +8,14 @@
  */
 int process_opcodes(char *opcode, stack_t **stack)
 {
+int line_number = ();
+
 if (strcmp(opcode, "push") == 0)
 {
-if (op_toks[1] == NULL || !is_number(op_toks[1]))
+if (op_toks[1] == NULL || !is_num(op_toks[1]))
 {
 	fprintf(stderr, "L%d: usage: push integer\n", line_number);
-	free_token_array(op_toks);
+	free_tokens(op_toks);
 	return (EXIT_FAILURE);
 }
 push(stack, atoi(op_toks[1]));
@@ -24,7 +26,7 @@ else if (strcmp(opcode, "pall") == 0)
 }
 else if (strcmp(opcode, "pint") == 0)
 {
-	pint(*stack)
+	pint(*stack);
 }
 else if (strcmp(opcode, "pop") == 0)
 {
