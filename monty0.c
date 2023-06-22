@@ -51,6 +51,7 @@ else
 	new_node->next = NULL;
 	tmp->next = new_node;
 }
+(void)value;
 }
 
 /**
@@ -67,5 +68,5 @@ void monty_pall(stack_t **stack, unsigned int value)
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
-	(void)line_number;
+	(void)value;
 }

@@ -81,11 +81,11 @@ int execute_script(FILE *script_fd);
 int process_opcodes(char *opcode, stack_t **stack);
 
 /* Function prototypes */
-void push(stack_t **stack, int value);
-void pall(stack_t **stack);
-void swap(stack_t **stack);
-void add(stack_t **stack);
-void pop(stack_t **stack);
+void push(stack_t **stack, unsigned int value);
+void pall(stack_t **stack, unsigned int value);
+void swap(stack_t **stack, unsigned int value);
+void add(stack_t **stack, unsigned int value);
+void pop(stack_t **stack, unsigned int value);
 void _stack(stack_t **stack, unsigned int line_number);
 void _queue(stack_t **stack, unsigned int line_number);
 void add_node(stack_t **stack, int n);
