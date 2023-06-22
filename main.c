@@ -1,4 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "monty.h"
+
+#define BUFFER_SIZE 1024
 
 info_t info;
 
@@ -12,7 +16,7 @@ info_t info;
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL;
+	char line[BUFFER_SIZE];
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 
@@ -30,9 +34,9 @@ int main(int argc, char *argv[])
 	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
+		line[strcspn(line, "\n")] = '\0';
 		parse_line(line, &stack, line_number);
 	}
-	free(line);
 	fclose(file);
 	free_list(stack);
 	return (EXIT_SUCCESS);

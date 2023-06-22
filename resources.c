@@ -1,10 +1,10 @@
 #include "monty.h"
 
 /**
- * is_num - This func checks for a num in range 0 to 9
- * @str: int to check
+ * is_num - Checks if a string represents a valid number
+ * @str: String to check
  *
- * Return: 1 if num is found, 0 if not
+ * Return: 1 if the string is a number, 0 otherwise
  */
 int is_num(char *str)
 {
@@ -12,13 +12,18 @@ int is_num(char *str)
 
 	if (str == NULL)
 	{
-		return (1);
+		return (0);
 	}
-	while (str[i])
+	if (str[0] == '-')
 	{
-		if (is_num(str) == 0)
-			return (1);
-		i++;
+		i = 1;
 	}
-	return (0);
+	for (; str[i] != '\0'; i++)
+	{
+		if (!isdigit(str[i]))
+		{
+			return (0);
+		}
+	}
+	return (1);
 }
