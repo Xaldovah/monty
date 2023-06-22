@@ -1,80 +1,71 @@
 #include "monty.h"
-/**
- * process_opcodes - Process the opcode based on the input token
- * @opcode: The opcode to process
- * @stack: Pointer to the top of the stack
- *
- * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on error
- */
-int process_opcodes(char *opcode, stack_t **stack)
-{
-int line_number = ();
-
-if (strcmp(opcode, "push") == 0)
-{
-if (op_toks[1] == NULL || !is_num(op_toks[1]))
-{
-	fprintf(stderr, "L%d: usage: push integer\n", line_number);
-	free_tokens(op_toks);
-	return (EXIT_FAILURE);
-}
-push(stack, atoi(op_toks[1]));
-}
-else if (strcmp(opcode, "pall") == 0)
-{
-	pall(*stack);
-}
-else if (strcmp(opcode, "pint") == 0)
-{
-	pint(*stack);
-}
-else if (strcmp(opcode, "pop") == 0)
-{
-	pop(stack);
-}
-else if (strcmp(opcode, "swap") == 0)
-{
-	swap(stack);
-}
-else if (strcmp(opcode, "add") == 0)
-{
-	add(stack);
-}
-else if (strcmp(opcode, "nop") == 0)
-{
-	nop(stack);
-}
-return (EXIT_SUCCESS);
-}
 
 /**
- * execute_script - Execute the Monty script
- *
- * @script_fd: File pointer to the Monty script
- *
- * Return: (EXIT_SUCCESS) on success, (EXIT_FAILURE) on error
+ * monty_push - Pushes a value to a stack_t linked list.
+ * @stack: pointer to the top mode node of a stack_t linked list.
+ * @value: current working line number of a Monty bytecodes file.
  */
-int execute_script(FILE *script_fd)
+void monty_push(stack_t** stack, unsigned int value)
 {
-char *line = NULL;
-size_t line_len = 0;
-ssize_t read;
-int exit_code = EXIT_SUCCESS;
-stack_t *stack = NULL;
+stack_t* tmp, * new_node;
+int i;
 
-while ((read = getline(&line, &line_len, script_fd)) != -1)
+new_node = malloc(sizeof(stack_t));
+if (new_node == NULL)
 {
-	op_toks = tokenize_line(line);
-	if (op_toks == NULL)
+	fprintf(stderr, "Error: Failed to allocate memory\n");
+	exit(EXIT_FAILURE);
+}
+if (op_toks[1] == NULL)
+{
+	fprintf(stderr, "Error: Usage: push integer\n");
+	exit(EXIT_FAILURE);
+}
+for (i = 0; op_toks[1][i]; i++)
+{
+	if (op_toks[1][i] == '-' && i == 0)
 		continue;
-
-	exit_code = process_opcodes(op_toks[0], &stack);
-	free_token_array(op_toks);
-
-	if (exit_code == EXIT_FAILURE)
-		break;
+	if (op_toks[1][i] < '0' || op_toks[1][i] > '9')
+	{
+		fprintf(stderr, "Error: Invalid integer argument\n");
+		exit(EXIT_FAILURE);
+	}
 }
-free(line);
-free_stack(stack);
-return (exit_code);
+new_node->n = atoi(op_toks[1]);
+
+if (check_mode(*stack) == STACK)
+{
+	tmp = (*stack)->next;
+	new_node->prev = *stack;
+	new_node->next = tmp;
+	if (tmp)
+		tmp->prev = new_node;
+	(*stack)->next = new_node;
+}
+else
+{
+	tmp = *stack;
+	while (tmp->next)
+		tmp = tmp->next;
+	new_node->prev = tmp;
+	new_node->next = NULL;
+	tmp->next = new_node;
+}
+}
+
+/**
+ * monty_pall - Prints values of a stack_t linked list.
+ * @stack: pointer to the top mode node of a stack_t linked list.
+ * @value: current working line number of a Monty bytecodes file.
+ */
+void monty_pall(stack_t **stack, unsigned int value)
+{
+	stack_t* tmp = (*stack)->next;
+
+	while (tmp)
+	{
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
+	}
+	(void)line_number;
 }
