@@ -63,6 +63,8 @@ void _queue(stack_t **stack, unsigned int line_number);
 void add_node(stack_t **stack, int n);
 void free_info(void);
 void pint(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 void parse_line(char *line, stack_t **stack, unsigned int line_number);
 void free_list(stack_t *stack);
 void pop(stack_t **stack, unsigned int line_number);

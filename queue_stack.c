@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * _stack - Set the format to the data to a stack 
+ * _stack - Set the format to the data to a stack
  * @stack: pointer to head
  * @line_number: ...
  */
