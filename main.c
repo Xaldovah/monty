@@ -35,55 +35,8 @@ int main(int argc, char *argv[])
 	{
 		line_number++;
 		line[strcspn(line, "\n")] = '\0';
-		parse_line(line, &stack, line_number);
 	}
 	fclose(file);
 	free_list(stack);
 	return (EXIT_SUCCESS);
-}
-
-/**
- * parse_line - Parses a line of Monty bytecode
- * @line: Line of Monty bytecode to parse
- * @stack: Pointer to the stack
- * @line_number: Line number of the bytecode
- */
-void parse_line(char *line, stack_t **stack, unsigned int line_number)
-{
-	char *opcode, *arg;
-
-	opcode = strtok(line, " \t\n");
-	if (opcode == NULL || opcode[0] == '#')
-		return;
-
-	if (strcmp(opcode, "push") == 0)
-	{
-		arg = strtok(NULL, " \t\n");
-		if (arg == NULL || !is_num(arg))
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			free_list(*stack);
-			exit(EXIT_FAILURE);
-		}
-		push(stack, line_number);
-	}
-	else if (strcmp(opcode, "pall") == 0)
-		pall(stack, line_number);
-	else if (strcmp(opcode, "pint") == 0)
-		pint(stack, line_number);
-	else if (strcmp(opcode, "pop") == 0)
-		pop(stack, line_number);
-	else if (strcmp(opcode, "swap") == 0)
-		swap(stack, line_number);
-	else if (strcmp(opcode, "add") == 0)
-		add(stack, line_number);
-	else if (strcmp(opcode, "nop") == 0)
-		nop(stack, line_number);
-	else
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-		free_list(*stack);
-		free_info();
-		exit(EXIT_FAILURE);
-	}
 }

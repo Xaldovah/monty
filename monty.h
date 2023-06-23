@@ -50,6 +50,7 @@ typedef struct info_s
 {
 	int format;
 	char **arg;
+	int line_number;
 } info_t;
 
 /* Global variables */
@@ -70,6 +71,8 @@ void free_list(stack_t *stack);
 void pop(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 int is_num(char *str);
+int p_init(stack_t **stack);
+int _isdigit(char *str);
 void add_fifo(stack_t **stack, stack_t *n_node);
 void add_lifo(stack_t **stack, stack_t *n_node);
 
