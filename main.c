@@ -30,7 +30,7 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	while ((new_read = getline(&info.line, &len, info.fon)) > 0)
+	while ((new_read = _getline(&info.line, &len, info.fon)) > 0)
 	{
 		if (*info.line == '\n')
 		{

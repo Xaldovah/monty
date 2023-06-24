@@ -113,3 +113,44 @@ void *_populate(void *i, int elem, unsigned int len)
 	}
 	return (i);
 }
+
+/**
+ * _getline - ...
+ * @lineptr: ...
+ * @n: ...
+ * @stream: ...
+ */
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
+{
+	size_t pos = 0;
+	int c;
+	size_t new_size = *n * 2;
+	char *new_lineptr;
+
+	if (*lineptr == NULL || *n == 0)
+	{
+		*n = 128;
+		*lineptr = malloc(*n);
+		if (*lineptr == NULL)
+			return (-1);
+	}
+	while ((c = fgetc(stream)) != EOF)
+	{
+		if (pos + 1 >= *n)
+		{
+			new_size = *n * 2;
+			new_lineptr = realloc(*lineptr, new_size);
+			if (new_lineptr == NULL)
+				return (-1);
+			*lineptr = new_lineptr;
+			*n = new_size;
+		}
+		(*lineptr)[pos++] = (char)c;
+		if (c == '\n')
+			break;
+	}
+	if (pos == 0 && c == EOF)
+		return -1;
+	(*lineptr)[pos] = '\0';
+	return (pos);
+}
