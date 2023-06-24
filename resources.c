@@ -48,3 +48,68 @@ int _isdigit(char *str)
 	}
 	return (0);
 }
+
+/**
+ * _realloc - reallocates memory block
+ * @ptr: pointer
+ * @old_size: ...
+ * @new_size: ...
+ *
+ * Return: pointer to new mem
+ */
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+{
+	void *res;
+
+	if (new_size == old_size)
+	{
+		return (ptr);
+	}
+	if (new_size == 0 && ptr)
+	{
+		free(ptr);
+		fprintf(stderr, "Error: malloc failed\n");
+		free_info();
+		exit(EXIT_FAILURE);
+	}
+	res = malloc(new_size);
+	if (res == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		free_info();
+		exit(EXIT_FAILURE);
+	}
+	if (ptr == NULL)
+	{
+		_populate(res, '\0', new_size);
+		free(ptr);
+	}
+	else
+	{
+		memcpy(res, ptr, old_size);
+		free(ptr);
+	}
+	return (res);
+}
+
+/**
+ * _populate - populates array with elements
+ * @i: array
+ * @elem: element
+ * @len: length array
+ *
+ * Return: pointer to populated array
+ */
+void *_populate(void *i, int elem, unsigned int len)
+{
+	char *p = i;
+	unsigned int a = 0;
+
+	while (a < len)
+	{
+		*p = elem;
+		p++;
+		a++;
+	}
+	return (i);
+}

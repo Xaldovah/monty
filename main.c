@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "monty.h"
 
 #define BUFFER_SIZE 1024
@@ -8,35 +6,49 @@ info_t info;
 
 /**
  * main - Entry point
- * @argc: Argument count
- * @argv: Argument vector
+ * @ac: Argument count
+ * @av: Argument vector
  *
  * Return: EXIT_SUCCESS on success, EXIT_FAILURE on failure
  */
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
-	FILE *file;
-	char line[BUFFER_SIZE];
-	unsigned int line_number = 0;
+	ssize_t new_read = 1;
+	size_t len = 0;
 	stack_t *stack = NULL;
 
-	if (argc != 2)
+	memset((void *) &info, 0, sizeof(info));
+	if (ac != 2)
 	{
 		fprintf(stderr, "Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	file = fopen(argv[1], "r");
-	if (file == NULL)
+	info.filename = av[1];
+	info.fon = fopen(info.filename, "r");
+	if (info.fon == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (fgets(line, sizeof(line), file) != NULL)
+	while ((new_read = getline(&info.line, &len, info.fon)) > 0)
 	{
-		line_number++;
-		line[strcspn(line, "\n")] = '\0';
+		if (*info.line == '\n')
+		{
+			continue;
+		}
+		info.line_number++;
+		free(info.arg);
+		if (_token() < 0)
+		{
+			continue;
+		}
+		if (*info.arg == NULL)
+		{
+			continue;
+		}
+		p_init(&stack);
 	}
-	fclose(file);
+	free_info();
 	free_list(stack);
 	return (EXIT_SUCCESS);
 }

@@ -1,16 +1,17 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#define DELIMS " \n\t\a"
+#define MAX_LINE_LENGTH 100
+#define LIFO 1
+#define FIFO 0
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include <sys/types.h>
-
-#define MAX_LINE_LENGTH 100
-
-#define LIFO 1
-#define FIFO 0
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -48,6 +49,9 @@ typedef struct instruction_s
  */
 typedef struct info_s
 {
+	FILE *fon;
+	char *line;
+	char *filename;
 	int format;
 	char **arg;
 	int line_number;
@@ -73,6 +77,9 @@ void add(stack_t **stack, unsigned int line_number);
 int is_num(char *str);
 int p_init(stack_t **stack);
 int _isdigit(char *str);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_populate(void *i, int elem, unsigned int len);
+int _token(void);
 void add_fifo(stack_t **stack, stack_t *n_node);
 void add_lifo(stack_t **stack, stack_t *n_node);
 
