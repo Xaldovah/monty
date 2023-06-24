@@ -115,10 +115,11 @@ void *_populate(void *i, int elem, unsigned int len)
 }
 
 /**
- * _getline - ...
+ * _getline - This func behaves like the normal getline
  * @lineptr: ...
  * @n: ...
  * @stream: ...
+ * Return: pos
  */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
@@ -150,7 +151,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 			break;
 	}
 	if (pos == 0 && c == EOF)
-		return -1;
+		return (-1);
 	(*lineptr)[pos] = '\0';
 	return (pos);
 }

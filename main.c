@@ -43,12 +43,13 @@ int main(int ac, char **av)
 			continue;
 		}
 		if (*info.arg == NULL)
-		{
 			continue;
-		}
 		p_init(&stack);
 	}
 	free_info();
 	free_list(stack);
+	free(info.line);
+	info.line = NULL;
+	fclose(info.fon);
 	return (EXIT_SUCCESS);
 }
