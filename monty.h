@@ -80,6 +80,7 @@ int _isdigit(char *str);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void *_populate(void *i, int elem, unsigned int len);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+void sub(stack_t **stack, unsigned int line_number);
 int _token(void);
 void add_fifo(stack_t **stack, stack_t *n_node);
 void add_lifo(stack_t **stack, stack_t *n_node);
