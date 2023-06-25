@@ -16,6 +16,7 @@ int p_init(stack_t **stack)
 		{"nop", nop},
 		{"add", add},
 		{"sub", sub},
+		{"div", _div},
 		{NULL, NULL}
 	};
 	int i = 0;
