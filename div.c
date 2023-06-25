@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "monty.h"
 
 /**
@@ -20,7 +19,7 @@ void _div(stack_t **stack, unsigned int line_number)
 	if ((*stack)->n == 0)
 	{
 		fprintf(stderr, "L<line_number>: division by zero\n");
-                exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	temp = *stack;
 	*stack = (*stack)->next;
