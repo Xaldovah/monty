@@ -87,6 +87,8 @@ void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
 int _token(void);
 void add_fifo(stack_t **stack, stack_t *n_node);
 void add_lifo(stack_t **stack, stack_t *n_node);
