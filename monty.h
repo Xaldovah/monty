@@ -83,6 +83,8 @@ void *_populate(void *i, int elem, unsigned int len);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void sub(stack_t **stack, unsigned int line_number);
 void _div(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_number);
+void mod(stack_t **stack, unsigned int line_number);
 int _token(void);
 void add_fifo(stack_t **stack, stack_t *n_node);
 void add_lifo(stack_t **stack, stack_t *n_node);
