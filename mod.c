@@ -14,12 +14,12 @@ void mod(stack_t **stack, unsigned int line_number)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L<line_number>: can't mod, stack too short");
+		fprintf(stderr, "L<line_number>: can't mod, stack too short\n");
 		exit(EXIT_FAILURE);
 	}
 	if (*stack == 0)
 	{
-		fprintf(stderr, "L<line_number>: division by zero");
+		fprintf(stderr, "L<line_number>: division by zero\n");
 		exit(EXIT_FAILURE);
 	}
 	temp = *stack;

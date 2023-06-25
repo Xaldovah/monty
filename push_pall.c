@@ -5,9 +5,10 @@
  * @stack: Pointer to the stack.
  * @line_number: Line number of the opcode.
  */
-void push(stack_t **stack, unsigned int line_number __attribute__((unused)))
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node;
+	(void) line_number;
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
@@ -17,7 +18,7 @@ void push(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	}
 	if (_isdigit(info.arg[1]) > 0)
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fprintf(stderr, "L<line_number>: usage: push integer\n");
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = atoi(info.arg[1]);
