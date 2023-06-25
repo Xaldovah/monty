@@ -65,7 +65,7 @@ extern info_t info;
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void _stack(stack_t **stack, unsigned int line_number);
-void _queue(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
 void add_node(stack_t **stack, int n);
 void free_info(void);
 void pint(stack_t **stack, unsigned int line_number);
@@ -90,7 +90,5 @@ void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 int _token(void);
-void add_fifo(stack_t **stack, stack_t *n_node);
-void add_lifo(stack_t **stack, stack_t *n_node);
 
 #endif /* MONTY_H */

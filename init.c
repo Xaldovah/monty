@@ -23,6 +23,8 @@ int p_init(stack_t **stack)
 		{"pstr", pstr},
 		{"rotl", rotl},
 		{"rotr", rotr},
+		{"_stack", _stack},
+		{"queue", queue},
 		{NULL, NULL}
 	};
 	int i = 0;

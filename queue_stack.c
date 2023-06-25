@@ -1,25 +1,37 @@
 #include "monty.h"
 
 /**
- * _stack - Set the format to the data to a stack
- * @stack: pointer to head
- * @line_number: ...
+ * _stack - Sets the format of the data to a stack (LIFO)
+ * @stack: Double pointer to the head of the stack
+ * @line_number: Line number being executed
  */
 void _stack(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
 	(void)stack;
-	info.format = LIFO;
+	(void)line_number;
 }
 
 /**
- * _queue - Set the format to the data to a queue
- * @stack: pointer to head
- * @line_number: ...
+ * queue - Sets the format of the data to a queue (FIFO)
+ * @stack: Double pointer to the head of the stack
+ * @line_number: Line number being executed
  */
-void _queue(stack_t **stack, unsigned int line_number)
+void queue(stack_t **stack, unsigned int line_number)
 {
+	stack_t *temp = *stack;
+
 	(void)line_number;
-	(void)stack;
-	info.format = FIFO;
+
+	if (*stack != NULL && (*stack)->next != NULL)
+	{
+		while (temp->next != NULL)
+		{
+			temp = temp->next;
+		}
+		temp->next = *stack;
+		(*stack)->prev = temp;
+		*stack = (*stack)->next;
+		(*stack)->prev->next = NULL;
+		(*stack)->prev = NULL;
+	}
 }
